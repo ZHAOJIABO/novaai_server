@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package weather;
+option go_package = "weather/proto";
+
+import "proto/na_interface/annotations.proto";
+
+// 天气服务定义
+service WeatherService {
+  // 获取明天天气的方法
+  rpc GetTomorrowWeather(WeatherRequest) returns (WeatherResponse) {
+    option (google.api.http) = {
+      get: "/v1/weather/tomorrow/{city}"
+    };
+  }
+}
+
+// 请求消息
+message WeatherRequest {
+  string city = 1;  // 城市名称
+}
+
+// 响应消息
+message WeatherResponse {
+  string temperature = 1;    // 温度
+  string condition = 2;      // 天气状况
+  string humidity = 3;       // 湿度
+  string wind_speed = 4;     // 风速
+}

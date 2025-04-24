@@ -1,0 +1,3 @@
+server:
+  grpc_address: ":50051"
+  http_address: ":8080"
