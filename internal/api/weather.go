@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"gorm.io/gorm"
 	nai "na_novaai_server/internal/na_interface"
 	"na_novaai_server/internal/service/weather"
 )
@@ -11,9 +12,9 @@ type WeatherServer struct {
 	weatherService *weather.Service
 }
 
-func NewWeatherServer() *WeatherServer {
+func NewWeatherServer(DB *gorm.DB) *WeatherServer {
 	return &WeatherServer{
-		weatherService: weather.NewService(),
+		weatherService: weather.NewWeatherService(DB),
 	}
 }
 

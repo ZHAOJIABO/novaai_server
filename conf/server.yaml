@@ -6,7 +6,7 @@ server:
 Mysql:
   Addr: 127.0.0.1
   User: root
-  Password: 1561000609
-  Db: test_zhao
+  Password: 1561
+  Db: na_novaai
   Port: 3306
 #  MigrationsDir: /Users/zhaojiabo/bluefocus/va_visionai_server/assets/migrations

@@ -20,5 +20,5 @@ type Weather struct {
 
 // TableName 指定表名
 func (Weather) TableName() string {
-	return "va_weather"
+	return "na_weather"
 }

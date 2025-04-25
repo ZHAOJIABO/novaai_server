@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"gorm.io/gorm"
 	"log"
 	"na_novaai_server/conf"
 	"na_novaai_server/internal/api"
@@ -27,12 +28,19 @@ type App struct {
 	gwmux *runtime.ServeMux
 }
 
+// InitDatabase 初始化数据库连接
+func InitDatabase() (*gorm.DB, error) {
+	return db.GetDB(), nil
+}
 func NewApp() (*App, error) {
 	app := &App{}
-
+	DB, err := InitDatabase()
+	if err != nil {
+		return nil, fmt.Errorf("init database failed: %v", err)
+	}
 	// 初始化 gRPC 服务器
 	app.grpcServer = grpc.NewServer()
-	weatherService := api.NewWeatherServer()
+	weatherService := api.NewWeatherServer(DB)
 	nai.RegisterWeatherServiceServer(app.grpcServer, weatherService)
 
 	// 创建 gRPC 监听器，使用固定地址而不是自动分配
@@ -46,16 +54,29 @@ func NewApp() (*App, error) {
 	}
 	app.grpcLis = lis
 
-	// 初始化 HTTP 服务器，使用固定地址
+	// 初始化 gRPC-Gateway mux
+	app.gwmux = runtime.NewServeMux()
+	opts := []grpc.DialOption{grpc.WithInsecure()}
+
+	// 注册 weather 服务的 HTTP 处理程序
+	err = nai.RegisterWeatherServiceHandlerFromEndpoint(
+		context.Background(),
+		app.gwmux,
+		grpcAddr,
+		opts,
+	)
+	if err != nil {
+		return nil, fmt.Errorf("failed to register gateway: %v", err)
+	}
+
+	// 初始化 HTTP 服务器，使用 gateway mux
 	httpAddr := conf.GlobalConfig.Server.HttpAddress
 	if httpAddr == "" {
 		httpAddr = ":8080"
 	}
 	app.httpServer = &http.Server{
-		Addr: httpAddr,
-		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.Write([]byte("Server is running"))
-		}),
+		Addr:    httpAddr,
+		Handler: app.gwmux,
 	}
 
 	return app, nil
@@ -104,7 +125,7 @@ func main() {
 
 	// 初始化数据库连接
 	log.Println("正在初始化数据库...")
-	if err := db.InitMysql(); err != nil {
+	if err := db.RegisterDB(); err != nil {
 		log.Fatalf("数据库初始化失败: %v", err)
 	}
 

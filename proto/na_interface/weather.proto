@@ -11,7 +11,6 @@ message WeatherRequest {
 // 天气响应消息
 message WeatherResponse {
   string temperature = 1;    // 温度
-  string condition = 2;      // 天气状况
-  string humidity = 3;       // 湿度
-  string wind_speed = 4;     // 风速
+  string humidity = 2;       // 湿度
+  string wind_speed = 3;     // 风速
 }

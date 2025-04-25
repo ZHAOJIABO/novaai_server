@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: novaai-service
+spec:
+  selector:
+    app: novaai-service
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  - name: grpc
+    port: 50051
+    targetPort: 50051
+  type: LoadBalancer

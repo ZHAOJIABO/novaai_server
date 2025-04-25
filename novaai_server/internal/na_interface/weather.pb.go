@@ -138,7 +138,7 @@ const file_proto_na_interface_weather_proto_rawDesc = "" +
 	"\vtemperature\x18\x01 \x01(\tR\vtemperature\x12\x1a\n" +
 	"\bhumidity\x18\x02 \x01(\tR\bhumidity\x12\x1d\n" +
 	"\n" +
-	"wind_speed\x18\x03 \x01(\tR\twindSpeedB0Z.github.com/novaai_server/internal/na_interfaceb\x06proto3"
+	"wind_speed\x18\x03 \x01(\tR\twindSpeedB%Z#novaai_server/internal/na_interfaceb\x06proto3"
 
 var (
 	file_proto_na_interface_weather_proto_rawDescOnce sync.Once
