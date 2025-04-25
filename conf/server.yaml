@@ -1,0 +1,12 @@
+servername: "nova-ai-server"
+server:
+  grpc_address: ":50051"
+  http_address: ":8080"
+
+Mysql:
+  Addr: 127.0.0.1
+  User: root
+  Password: 1561000609
+  Db: test_zhao
+  Port: 3306
+#  MigrationsDir: /Users/zhaojiabo/bluefocus/va_visionai_server/assets/migrations

@@ -1,26 +1,14 @@
 syntax = "proto3";
 
 package weather;
-option go_package = "weather/proto";
+option go_package = "github.com/novaai_server/internal/na_interface";
 
-import "proto/na_interface/annotations.proto";
-
-// 天气服务定义
-service WeatherService {
-  // 获取明天天气的方法
-  rpc GetTomorrowWeather(WeatherRequest) returns (WeatherResponse) {
-    option (google.api.http) = {
-      get: "/v1/weather/tomorrow/{city}"
-    };
-  }
-}
-
-// 请求消息
+// 天气请求消息
 message WeatherRequest {
   string city = 1;  // 城市名称
 }
 
-// 响应消息
+// 天气响应消息
 message WeatherResponse {
   string temperature = 1;    // 温度
   string condition = 2;      // 天气状况

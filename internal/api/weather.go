@@ -1,9 +1,9 @@
-package weather
+package api
 
 import (
 	"context"
 	nai "na_novaai_server/internal/na_interface"
-	"na_novaai_server/service/weather"
+	"na_novaai_server/internal/service/weather"
 )
 
 type WeatherServer struct {

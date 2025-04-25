@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package na_interface;
+option go_package = "na_interface/proto";
+
+import "proto/na_interface/annotations.proto";
+import "proto/na_interface/weather.proto";
+
+// 服务接口定义
+service NovaAIService {
+  // 天气服务
+  rpc GetTomorrowWeather(weather.WeatherRequest) returns (weather.WeatherResponse) {
+    option (google.api.http) = {
+      get: "/v1/weather/tomorrow/{city}"
+    };
+  }
+  
+  // 这里可以继续添加其他服务接口
+}
