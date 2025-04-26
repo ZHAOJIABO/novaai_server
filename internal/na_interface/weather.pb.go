@@ -127,6 +127,107 @@ func (x *WeatherResponse) GetWindSpeed() string {
 	return ""
 }
 
+// 健康检查请求
+type HealthCheckRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HealthCheckRequest) Reset() {
+	*x = HealthCheckRequest{}
+	mi := &file_proto_na_interface_weather_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealthCheckRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealthCheckRequest) ProtoMessage() {}
+
+func (x *HealthCheckRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_na_interface_weather_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealthCheckRequest.ProtoReflect.Descriptor instead.
+func (*HealthCheckRequest) Descriptor() ([]byte, []int) {
+	return file_proto_na_interface_weather_proto_rawDescGZIP(), []int{2}
+}
+
+// 健康检查响应
+type HealthCheckResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 服务状态
+	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	// 服务版本
+	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
+	// 运行时间
+	Uptime        int64 `protobuf:"varint,3,opt,name=uptime,proto3" json:"uptime,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HealthCheckResponse) Reset() {
+	*x = HealthCheckResponse{}
+	mi := &file_proto_na_interface_weather_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealthCheckResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealthCheckResponse) ProtoMessage() {}
+
+func (x *HealthCheckResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_na_interface_weather_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealthCheckResponse.ProtoReflect.Descriptor instead.
+func (*HealthCheckResponse) Descriptor() ([]byte, []int) {
+	return file_proto_na_interface_weather_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *HealthCheckResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *HealthCheckResponse) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+func (x *HealthCheckResponse) GetUptime() int64 {
+	if x != nil {
+		return x.Uptime
+	}
+	return 0
+}
+
 var File_proto_na_interface_weather_proto protoreflect.FileDescriptor
 
 const file_proto_na_interface_weather_proto_rawDesc = "" +
@@ -138,7 +239,12 @@ const file_proto_na_interface_weather_proto_rawDesc = "" +
 	"\vtemperature\x18\x01 \x01(\tR\vtemperature\x12\x1a\n" +
 	"\bhumidity\x18\x02 \x01(\tR\bhumidity\x12\x1d\n" +
 	"\n" +
-	"wind_speed\x18\x03 \x01(\tR\twindSpeedB0Z.github.com/novaai_server/internal/na_interfaceb\x06proto3"
+	"wind_speed\x18\x03 \x01(\tR\twindSpeed\"\x14\n" +
+	"\x12HealthCheckRequest\"_\n" +
+	"\x13HealthCheckResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\tR\aversion\x12\x16\n" +
+	"\x06uptime\x18\x03 \x01(\x03R\x06uptimeB\x17Z\x15internal/na_interfaceb\x06proto3"
 
 var (
 	file_proto_na_interface_weather_proto_rawDescOnce sync.Once
@@ -152,10 +258,12 @@ func file_proto_na_interface_weather_proto_rawDescGZIP() []byte {
 	return file_proto_na_interface_weather_proto_rawDescData
 }
 
-var file_proto_na_interface_weather_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_na_interface_weather_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_na_interface_weather_proto_goTypes = []any{
-	(*WeatherRequest)(nil),  // 0: weather.WeatherRequest
-	(*WeatherResponse)(nil), // 1: weather.WeatherResponse
+	(*WeatherRequest)(nil),      // 0: weather.WeatherRequest
+	(*WeatherResponse)(nil),     // 1: weather.WeatherResponse
+	(*HealthCheckRequest)(nil),  // 2: weather.HealthCheckRequest
+	(*HealthCheckResponse)(nil), // 3: weather.HealthCheckResponse
 }
 var file_proto_na_interface_weather_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -176,7 +284,7 @@ func file_proto_na_interface_weather_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_na_interface_weather_proto_rawDesc), len(file_proto_na_interface_weather_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

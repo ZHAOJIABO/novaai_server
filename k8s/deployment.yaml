@@ -16,23 +16,12 @@ spec:
     spec:
       containers:
       - name: novaai-service
-        image: novaai-service:latest
+        image: registry.cn-hangzhou.aliyuncs.com/novaai/novaai-server:latest
         ports:
         - containerPort: 8080
           name: http
         - containerPort: 50051
           name: grpc
-        env:
-        - name: DB_HOST
-          value: "your-mysql-host"
-        - name: DB_PORT
-          value: "3306"
-        - name: DB_USER
-          value: "your-db-user"
-        - name: DB_PASSWORD
-          value: "your-db-password"
-        - name: DB_NAME
-          value: "your-db-name"
         resources:
           requests:
             cpu: "100m"

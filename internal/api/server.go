@@ -5,8 +5,6 @@ import (
 	_ "errors"
 	_ "regexp"
 	"time"
-
-	_ "na_novaai_server/internal/na_interface"
 )
 
 const (
